@@ -69,12 +69,19 @@ function sum (anArray) { // pass the array and start value to reduce; in this ca
 }
 
 function every (anArray, aFunc) { // needed to look at soln; complex to follow but I think I can (chrome debug)
-  debugger;
   var everyIterator = function (currentValue, nextValue) {
   	return currentValue && aFunc(nextValue);
   	};
   	return reduce(anArray, true, everyIterator);
   }
+
+function any (anArray, aFunc) {
+	var anyIterator = function (currentValue, nextValue) {
+		return currentValue || aFunc(nextValue);
+	};
+	return reduce (anArray, false, anyIterator);
+}
+
 
 
 
