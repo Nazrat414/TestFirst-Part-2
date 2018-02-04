@@ -40,28 +40,51 @@ function type (arg) {
 	// above return code eliminates the '[object' at start and ']' at end;
 }
 
-
-function stringify (aValue) {
-	debugger;
-	if (type(aValue) === 'Array'){
-		if (aValue.length) {
-			if (Array.isArray(aValue[0])) {
-				return stringify(aValue[0]) + stringify(aValue.slice(1));
-			} else {
-				return 1 + stringify(aValue.slice(1));
-			}
+// STRINGIFY ME:
+// function stringify (aValue) {
+// 	debugger;
+// 	if (type(aValue) === 'Array'){
+// 		if (aValue.length) {
+// 			if (Array.isArray(aValue[0])) {
+// 				return stringify(aValue[0]) + stringify(aValue.slice(1));
+// 			} else {
+// 				return 1 + stringify(aValue.slice(1));
+// 			}
 			
-		} else {return 0};
-		
-	} else if (type(aValue) === 'Object') {
-		return '{}';
-	} else if (type(aValue) === 'String') {
-		return '"abc"';
-	} else {
-		return String(aValue); // found this in forum - not sure I'd have it otherwise
-	}
-}
+// 		} else {return 0};
 
+// 	} else if (type(aValue) === 'Object') {
+// 		return '{}';
+// 	} else if (type(aValue) === 'String') {
+// 		return '"abc"';
+// 	} else {
+// 		return String(aValue); // found this in forum - not sure I'd have it otherwise
+// 	}
+// }
+// stringify actual soln.
+function stringify(obj) {
+    if(type(obj) === 'String') {
+        return '"' + obj + '"';
+    }
+    if(type(obj) === 'Array') {
+        var result = obj.map(function(o){
+            return stringify(o);
+        });   
+        return '[' + result.join(',') + ']';
+    }
+
+    if(type(obj) === "Object") {
+		var result = [];
+		Object.keys(obj).forEach(function(key){
+			var val = stringify(obj[key]);
+				result.push('"' + key + '": ' + val);
+
+		});
+		return "{" + result.join(",") + "}";
+	}
+
+    return obj + "";
+}
 
 
 
