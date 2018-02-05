@@ -24,7 +24,7 @@ describe('the function factorial', function() {
     it('handles the base case', function() {
       expect(factorial(0)).toEqual(1);
     });
-    it('correctly comptues factorial', function() {
+    it('correctly computes factorial', function() {
       expect(factorial(10)).toEqual(3628800);
     });
     //

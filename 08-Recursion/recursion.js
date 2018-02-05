@@ -34,7 +34,7 @@ function fib (num) {
 }
 
 function type (arg) {
-	debugger;
+	//debugger;
 	var output = Object.prototype.toString.call(arg);
 	return output.substring((output.indexOf(" ") + 1), output.length - 1);
 	// above return code eliminates the '[object' at start and ']' at end;
@@ -63,11 +63,12 @@ function type (arg) {
 // }
 // stringify actual soln.
 function stringify(obj) {
+	debugger;
     if(type(obj) === 'String') {
         return '"' + obj + '"';
     }
     if(type(obj) === 'Array') {
-        var result = obj.map(function(o){
+        var result = obj.map(function(o){ // o = current elem; array[0] if no starting point defined;
             return stringify(o);
         });   
         return '[' + result.join(',') + ']';
