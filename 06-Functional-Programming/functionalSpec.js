@@ -150,12 +150,12 @@ describe("the function every", function() {
   });
 
   var isEven = function(num) {
-    debugger;
+    //debugger;
     return num % 2 === 0;
   };
 
   var getValue = function(i) {
-    debugger;
+    //debugger;
     return i;
   };
 
