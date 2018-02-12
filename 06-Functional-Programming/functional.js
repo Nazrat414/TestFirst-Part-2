@@ -78,7 +78,7 @@ function any(arr, func){
 		return currentVal || func(nextVal);
 	}
 
-	return reduce(arr, false, anyIterator); // called current value 'false' on intuition;
+	return reduce(arr, false, anyIterator); // called current value 'false' on intuition;  not sure I can explain
 }
 
 
