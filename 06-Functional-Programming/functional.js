@@ -1,87 +1,47 @@
-function doubler(num){
-	return num * 2;
+function doubler (aNum) {
+	return aNum * 2;
 }
 
-function map(arr, func){
-	var outputArr = [];
-	for(var i = 0; i < arr.length; i++){
-		var currentNum = arr[i];
-		outputArr.push(func(currentNum));
+
+
+function map (anArray, aFunc) {
+	// performs func on ea. element of anArray
+	// returns array w/ each transformed elem
+	var outputArray = []; // store transformed elems...
+	for (var i = 0; i < anArray.length; i++) {
+		var currentElem = anArray[i];
+		outputArray.push(aFunc(currentElem)); // operate on each elem with func.
 	}
-	return outputArr;
+	return outputArray;
 }
 
-function filter(arr, func){
-	var outputArr = [];
-	for(var i = 0; i < arr.length; i++){
-		var currentNum = arr[i];
-		if(func(currentNum)){
-			outputArr.push(currentNum);
+function filter (anArray, aFunc) {
+	// create output array...
+	var output = [];
+	for (var i = 0; i < anArray.length; i++) {
+		var currentElem = anArray[i];
+		if (aFunc(currentElem)) { // if this evaluates as true...
+			output.push(currentElem);
 		}
 	}
-	return outputArr;
+	return output;
 }
 
-function contains(collection, searchTerm){
-	if(!Array.isArray(collection)){
-		for(var key in collection){
-			if(collection[key] === searchTerm){
-				return true;
-			}
+function contains (collection, item) {
+	// does collection contain item?
+	// arrays are objects...
+	for (var key in collection) {
+		if (collection[key] === item) {
+			return true;
 		}
-		// return false;
-	} else if(collection.indexOf(searchTerm) !== -1){
-		return true;
-	} else {
-		return false;
 	}
-	}  // works; could probably be cleaner...
-
-function countWords(sentence){
-	wordsArray = sentence.split(' ');
-	return wordsArray.length;
+	return false;
 }
 
-function countWordsInReduce(currentVal, sentence) {
-	//debugger;
-	return currentVal + countWords(sentence);
+function countWords (sentence) {
+	return sentence.split(' ').length;
 }
 
-function reduce(arr, startVal, combiner){
-	var currentVal = startVal;
-	for(var i = 0; i < arr.length; i++){
-		var currentNum = arr[i];
-		currentVal = combiner(currentVal, currentNum);
-	}
-	return currentVal;
+function reduce (collection, startVal, combinerFunc) {
+	// paused to look at checkpoint 2;
 }
-
-function sum(arr){ // to pass to reduce, you have to give it a fxn for what you want to accomplish!
-	function adder(currentSum, nextVal){ // this is that function; like 'add';
-		return currentSum + nextVal;
-	}
-	return reduce(arr, 0, adder);
-}
-
-function every(arr, func){
-	// two conditions evaluated; if both true, return true; otherwise return false
-	// what are those conditions?
-	function everyIterator(currentVal, nextVal){
-
-		return currentVal && func(nextVal);
-	}
-	return reduce(arr, true, everyIterator);
-}
-
-function any(arr, func){
-	function anyIterator(currentVal, nextVal){
-		return currentVal || func(nextVal);
-	}
-
-	return reduce(arr, false, anyIterator); // called current value 'false' on intuition;  not sure I can explain
-}
-
-
-
-
-
