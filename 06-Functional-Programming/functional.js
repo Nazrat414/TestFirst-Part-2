@@ -42,6 +42,81 @@ function countWords (sentence) {
 	return sentence.split(' ').length;
 }
 
-function reduce (collection, startVal, combinerFunc) {
-	// paused to look at checkpoint 2;
+function countWordsInReduce (currentVal, sentence) { // didn't pass currentVal initially...
+	// NOTE: SINCE USED IN REDUCE, HAS TO BE A COMBINER; NEED TWO ARGS!
+	return currentVal + countWords(sentence);
 }
+
+function reduce (collection, startVal, combinerFunc) {
+	var currentValue = startVal;
+	//var returnValue = 0;
+
+	for (var i = 0; i < collection.length; i++) {
+		var currentElem = collection[i];
+		currentValue = combinerFunc(currentValue, currentElem)
+	}
+	return currentValue;
+}
+
+function sum (arr) { // THAT'S IT!  NICE WORK!  WROTE OWN CALLBACK FUNC.
+	return reduce(arr, 0, function (a, b) { // instead of passing pre-written function, pass one u write.
+		return a + b;
+	});
+}
+
+function every (arr, func) {
+	// MY INITIAL ATTEMPT - PASSED 3 OF 4 SPECS...
+	// return reduce (arr, true, function (){
+	// 	if (true && func()){
+	// 		return true;
+	// 	} else {
+	// 		return false
+	// 	}
+	// });
+	// rewrite...BELOW WORKS!  MY OWN REWRITE!
+	return reduce (arr, true, function (a, b){
+		if (a && func(b)) {
+			return true;
+		} else {
+			return false;
+		}
+	});
+	// OFFICIAL SOLN...SLIGHT REWRITE ON MY PART...
+	/*
+	var everyIterator = function (currentVal, nextVal) {
+		return currentVal && func(nextVal);
+	});
+
+	return reduce (arr, true, everyIterator)
+	*/
+}
+
+function any (arr, func) { // this works also!!  official soln. like above...
+	return reduce (arr, false, function (a, b) {
+		if (a || func(b)) {
+			return true;
+		} else {
+			return false;
+		}
+	});
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
